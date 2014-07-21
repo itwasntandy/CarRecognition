@@ -31,14 +31,14 @@ Application:
 ----
 
    * take input files (image), add to queue.
+      * Should it take input over HTTP or direct from disk?
+      * initially HTTP I think, because not done it before.
    * have classifier workers pull images off the queue, attempt each form of classifier in turn (most populate types first)
    * worker output is:
-      * If single classifier matched, mark file with classifier (exif tag with keywords??) 
+      * If single classifier matched, HTTP response with classifier that matched.
       * if multiple classifiers match, then review confidence for each classifier
-         * if confidence is much higher for one match then mark as probably that
-            * mark for verify, and re-train the one which false positived.
-         * if confidence is similar, mark as false positive and mark for review
-      * if no classifiers match, then mark as verify needed.
+         * respond with both along with confidence for each.
+      * if no classifiers match, then respond saying no match, flag for manual intervention.
 
 
 Background Reading:
